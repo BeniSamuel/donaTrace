@@ -18,5 +18,12 @@ export class User {
 
     @Column({type: String, enum: Role, default: Role.DONOR})
     role: Role;
-    
+
+    constructor (name: string, email: string, password: string, role: Role) {
+        this.name = name;
+        this.email = email;
+        this.password = password;
+        this.role = role;
+    }
+
 }
