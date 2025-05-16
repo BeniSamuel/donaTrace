@@ -4,7 +4,7 @@ import { ResponseEntity } from "src/utils/response.util";
 import { User } from "src/model/user.model";
 import { RegisterDto } from "src/dto/register.dto";
 
-@Controller("/api/users")
+@Controller("/api/donatrace/users")
 export class UserController {
     constructor (private readonly userService: UserService) {}
 
