@@ -1,0 +1,22 @@
+import { Entity, ManyToOne, PrimaryGeneratedColumn, Column } from "typeorm";
+import { User } from "./user.model";
+
+@Entity("donation")
+export class Donation {
+
+    @PrimaryGeneratedColumn()
+    id: number;
+
+    @ManyToOne(() => User, (user) => user.id)
+    donor: User;
+
+    @Column()
+    bloodType: string;
+
+    @Column()
+    volume: number;
+
+    @Column()
+    donatedAt: Date;
+    
+}
