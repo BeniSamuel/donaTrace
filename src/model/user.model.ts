@@ -13,7 +13,7 @@ export class User {
     @Column({unique: true})
     email: string;
 
-    @Column({length: 6})
+    @Column()
     password: string;
 
     @Column({type: String, enum: Role, default: Role.DONOR})
