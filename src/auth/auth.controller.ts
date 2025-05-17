@@ -10,6 +10,7 @@ export class AuthController {
     constructor (private readonly authService: AuthService) {}
 
     @Post("/register")
+    @HttpCode(HttpStatus.CREATED)
     async registerUser (@Body() registerDto: RegisterDto): Promise<ResponseEntity<User>> {
         return ResponseEntity.created("Successfully registered a user!!! 🎉🎉🎉", await this.authService.registerUser(registerDto));
     }
