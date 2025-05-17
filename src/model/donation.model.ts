@@ -23,4 +23,12 @@ export class Donation {
     @ManyToOne(() => Inventory, (inventory) => inventory.id)
     inventory: Inventory;
     
+    constructor (donor: User, bloodType: string, volume: number, donatedAt: Date, inventory: Inventory) {
+        this.donor = donor;
+        this.bloodType = bloodType;
+        this.volume = volume;
+        this.donatedAt = donatedAt;
+        this.inventory = inventory;
+    }
+    
 }
