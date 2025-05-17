@@ -1,4 +1,4 @@
-import { Body, Controller, Get, HttpCode, HttpStatus, Param, Post } from "@nestjs/common";
+import { Body, Controller, Delete, Get, HttpCode, HttpStatus, Param, Post, Put } from "@nestjs/common";
 import { InventoryService } from "./inventory.service";
 import { ResponseEntity } from "src/utils/response.util";
 import { Inventory } from "src/model/inventory.model";
@@ -32,5 +32,22 @@ export class InventoryController {
             return ResponseEntity.created("Successfully created an inventory!!! 🎉🎉🎉", newInventory);
         }
         return ResponseEntity.notFound("Sorry hospital not found!!! 😔💔💔", null);
+    }
+
+    @Put("/hospital/:hospitalId/:inventoryId")
+    async updateInventory (@Param("hospitalId") hospitalId: number, @Param("inventoryId") inventoryId: number, @Body() inventoryDto: InventoryDto): Promise<ResponseEntity<Inventory>> {
+        const inventory: Inventory = await this.inventoryService.updateInventory(hospitalId, inventoryId, inventoryDto);
+        if (inventory != null) {
+            return ResponseEntity.ok("Successfully updated inventory!!! 🎉🎉🎉", inventory);
+        }
+        return ResponseEntity.badRequest("Bad request check your input!!! ❌❌❌", null);
+    }
+
+    @Delete("/hospital/:hospitalId/:inventoryId")
+    async deleteInventory (@Param("hospitalId") hospitalId: number, @Param("inventoryId") inventoryId: number): Promise<ResponseEntity<Boolean>> {
+        const success: Boolean = await this.inventoryService.deleteInventory(hospitalId, inventoryId);
+        return success ?
+        ResponseEntity.ok("Successfully deleted inventory!!! 🎉🎉🎉", success) :
+        ResponseEntity.notFound("Sorry inventory not found to be deleted!!! 😔💔💔", success);
     }
 }

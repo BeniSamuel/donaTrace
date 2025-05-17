@@ -36,6 +36,20 @@ export class InventoryService {
         }
         return null;
     }
+
+    async updateInventory (hospitalId: number, inventoryId: number, inventoryDto: InventoryDto): Promise<Inventory> {
+        const hospital = await this.hospitalService.getHospitalById(hospitalId);
+        if (hospital == null) return null;
+
+        const inventory = await this.inventoryRepository.findOne({where: {
+            id: inventoryId,
+            hospital: hospital
+        }});
+        if (inventory == null) return null;
+
+        inventory.bloodType = inventoryDto.bloodType;
+        return this.inventoryRepository.save(inventory);
+    }
     
     async deleteInventory (hospitalId: number, inventoryId: number): Promise<Boolean> {
         const hospital = await this.hospitalService.getHospitalById(hospitalId);
