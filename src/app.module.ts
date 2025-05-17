@@ -11,6 +11,7 @@ import { JwtModule } from "@nestjs/jwt";
 import { HospitalModule } from "./hospital/hospital.module";
 import { InventoryModule } from "./inventory/inventory.module";
 import { AuthModule } from "./auth/auth.module";
+import { DonationModule } from "./donation/donation.module";
 
 @Module({
   imports: [
@@ -31,7 +32,8 @@ import { AuthModule } from "./auth/auth.module";
     AuthModule,
     UserModule,
     HospitalModule,
-    InventoryModule
+    InventoryModule,
+    DonationModule
   ],
   controllers: [AppController],
   providers: [AppService],
