@@ -1,4 +1,4 @@
-import { Body, Controller } from "@nestjs/common";
+import { Body, Controller, HttpCode, HttpStatus, Post } from "@nestjs/common";
 import { AuthService } from "./auth.service";
 import { ResponseEntity } from "src/utils/response.util";
 import { User } from "src/model/user.model";
@@ -9,10 +9,13 @@ import { LoginDto } from "src/dto/login.dto";
 export class AuthController {
     constructor (private readonly authService: AuthService) {}
 
+    @Post("/register")
     async registerUser (@Body() registerDto: RegisterDto): Promise<ResponseEntity<User>> {
         return ResponseEntity.created("Successfully registered a user!!! 🎉🎉🎉", await this.authService.registerUser(registerDto));
     }
 
+    @Post("/login")
+    @HttpCode(HttpStatus.OK || HttpStatus.BAD_REQUEST)
     loginUser (@Body() loginDto: LoginDto): Promise<ResponseEntity<String>> {
         return this.authService.loginUser(loginDto);
     }

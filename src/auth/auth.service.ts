@@ -20,11 +20,11 @@ export class AuthService {
 
     async loginUser (loginDto: LoginDto): Promise<ResponseEntity<String>> {
         const user = await this.userService.getUserByEmail(loginDto.email);
-        if (user != null) {
-            return ResponseEntity.badRequest("Bad credentials provided!!! 😔💔💔", null);
+        if (!user) {
+            return ResponseEntity.badRequest("Bad credentials provided email!!! 😔💔💔", null);
         }
-        if (!bcrypt.compare(user.password, loginDto.password)) {
-            return ResponseEntity.badRequest("Bad credentials provided!!! 😔💔💔", null);
+        if (await bcrypt.compare(user.password, loginDto.password) !== false) {
+            return ResponseEntity.badRequest("Bad credentials provided password!!! 😔💔💔", null);
         }
         const token = this.jwtService.sign(user.email);
         return ResponseEntity.ok("Successfully logged in user!!! 🎉🎉🎉", token);
