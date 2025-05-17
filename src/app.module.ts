@@ -8,6 +8,9 @@ import { Inventory } from "./model/inventory.model";
 import { Hospital } from "./model/hospital.model";
 import { UserModule } from "./users/users.module";
 import { JwtModule } from "@nestjs/jwt";
+import { HospitalModule } from "./hospital/hospital.module";
+import { InventoryModule } from "./inventory/inventory.module";
+import { AuthModule } from "./auth/auth.module";
 
 @Module({
   imports: [
@@ -25,7 +28,10 @@ import { JwtModule } from "@nestjs/jwt";
       entities: [User, Donation, Inventory, Hospital],
       synchronize: true
     }),
-    UserModule
+    AuthModule,
+    UserModule,
+    HospitalModule,
+    InventoryModule
   ],
   controllers: [AppController],
   providers: [AppService],
