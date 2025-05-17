@@ -1,5 +1,6 @@
 import { Entity, ManyToOne, PrimaryGeneratedColumn, Column } from "typeorm";
 import { User } from "./user.model";
+import { Inventory } from "./inventory.model";
 
 @Entity("donation")
 export class Donation {
@@ -18,5 +19,8 @@ export class Donation {
 
     @Column()
     donatedAt: Date;
+
+    @ManyToOne(() => Inventory, (inventory) => inventory.id)
+    inventory: Inventory;
     
 }

@@ -13,4 +13,8 @@ export class Inventory {
     @Column()
     bloodType: string;
     
+    constructor (hospital: Hospital, bloodType: string) {
+        this.hospital = hospital;
+        this.bloodType = bloodType;
+    }
 }
