@@ -15,7 +15,7 @@ export class UserController {
     }
 
     @Get("/:userId")
-    @HttpCode(HttpStatus.OK | HttpStatus.NOT_FOUND)
+    @HttpCode(HttpStatus.OK || HttpStatus.NOT_FOUND)
     async getUserById (@Param("userId") userId: number): Promise<ResponseEntity<User>> {
         const user = await this.userService.getUserById(userId);
         if (user != null) {
@@ -25,7 +25,7 @@ export class UserController {
     }
 
     @Put("/:userId")
-    @HttpCode(HttpStatus.OK | HttpStatus.NOT_FOUND)
+    @HttpCode(HttpStatus.OK || HttpStatus.NOT_FOUND)
     async updateUserById (@Param("userId") userId: number, @Body() registerDto: RegisterDto): Promise<ResponseEntity<User>> {
         const user = await this.userService.updateUserById(userId, registerDto);
         if (user != null) {
