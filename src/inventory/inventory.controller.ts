@@ -14,7 +14,7 @@ export class InventoryController {
         return ResponseEntity.ok("Successfully obtained all inventory!!! 🎉🎉🎉", await this.inventoryService.getAllInventories());
     }
 
-    @Get("/hospital/hospitalId")
+    @Get("/hospital/:hospitalId")
     @HttpCode(HttpStatus.OK || HttpStatus.NOT_FOUND)
     async getAllInventoryByHospitalId (@Param("hospitalId") hospitalId: number): Promise<ResponseEntity<Inventory[]>> {
         const inventories: Inventory[] = await this.inventoryService.getInventoriesByHospital(hospitalId);
